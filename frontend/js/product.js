@@ -1,7 +1,6 @@
 // Global variables for product functionality
 let products = [];
 let filteredProducts = [];
-let baseUrl = 'http://localhost:5000';
 
 // Initialize product functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -171,125 +170,16 @@ async function loadProducts() {
             filteredProducts = [...products];
             renderProductList(filteredProducts);
         } else {
-            // If API request fails, use fallback data
-            loadFallbackProducts();
+            let noProduct = []
+            renderProductList(noProduct);
+
         }
     } catch (error) {
         console.error('Error loading products:', error);
-        // Use fallback data if API request fails
-        loadFallbackProducts();
     }
 }
 
-// Load fallback product data (used when API is unavailable)
-function loadFallbackProducts() {
-    // Fallback data for offline development or when API is down
-    products = [
-        {
-            id: 1,
-            name: 'MacBook Pro 13"',
-            description: 'Latest model with Apple M2 chip, 8GB RAM, 256GB SSD',
-            price: 1299.99,
-            category: 'laptops',
-            brand: 'apple',
-            rating: 4.5,
-            reviewCount: 128,
-            image: 'https://placehold.co/300x200',
-            featured: true
-        },
-        {
-            id: 2,
-            name: 'Samsung Galaxy S23',
-            description: '6.1" Display, 128GB Storage, 8GB RAM, 50MP Camera',
-            price: 899.99,
-            category: 'smartphones',
-            brand: 'samsung',
-            rating: 4.8,
-            reviewCount: 95,
-            image: 'https://placehold.co/300x200',
-            featured: true
-        },
-        {
-            id: 3,
-            name: 'Sony WH-1000XM5',
-            description: 'Wireless Premium Noise Cancelling Headphones',
-            price: 249.99,
-            category: 'accessories',
-            brand: 'sony',
-            rating: 4.3,
-            reviewCount: 74,
-            image: 'https://placehold.co/300x200',
-            featured: true
-        },
-        {
-            id: 4,
-            name: 'Apple Watch Series 8',
-            description: 'GPS, 41mm Aluminum Case with Sport Band',
-            price: 399.99,
-            category: 'wearables',
-            brand: 'apple',
-            rating: 4.6,
-            reviewCount: 112,
-            image: 'https://placehold.co/300x200',
-            featured: true
-        },
-        {
-            id: 5,
-            name: 'Dell XPS 13',
-            description: '13.3" FHD Display, Intel Core i5, 8GB RAM, 256GB SSD',
-            price: 849.99,
-            category: 'laptops',
-            brand: 'dell',
-            rating: 4.2,
-            reviewCount: 63,
-            image: 'https://placehold.co/300x200',
-            featured: false
-        },
-        {
-            id: 6,
-            name: 'Samsung Galaxy Buds Pro',
-            description: 'Wireless Earbuds with Active Noise Cancellation',
-            price: 129.99,
-            category: 'accessories',
-            brand: 'samsung',
-            rating: 4.1,
-            reviewCount: 87,
-            image: 'https://placehold.co/300x200',
-            featured: false
-        },
-        {
-            id: 7,
-            name: 'iPad Air',
-            description: '10.9-inch display, A14 Bionic chip, 64GB storage',
-            price: 599.99,
-            category: 'tablets',
-            brand: 'apple',
-            rating: 4.7,
-            reviewCount: 92,
-            image: 'https://placehold.co/300x200',
-            featured: false
-        },
-        {
-            id: 8,
-            name: 'Logitech MX Master 3',
-            description: 'Advanced Wireless Mouse for Mac and PC',
-            price: 99.99,
-            category: 'accessories',
-            brand: 'logitech',
-            rating: 4.4,
-            reviewCount: 56,
-            image: 'https://placehold.co/300x200',
-            featured: false
-        }
-    ];
-    
-    filteredProducts = [...products];
-    
-    // If we're on the product list page, render products
-    if (window.location.pathname.includes('product-list.html')) {
-        handleUrlParams(); // This will apply any filters and render the list
-    }
-}
+
 
 // Handle URL parameters for filtering products
 function handleUrlParams() {
@@ -550,8 +440,7 @@ async function fetchProductDetails(productId) {
             const product = await response.json();
             renderProductDetails(product);
         } else {
-            // Try the fallback data
-            loadFallbackProducts();
+         
             const product = products.find(p => p.id === productId);
             
             if (product) {
@@ -564,8 +453,7 @@ async function fetchProductDetails(productId) {
     } catch (error) {
         console.error('Error fetching product details:', error);
         
-        // Try the fallback data
-        loadFallbackProducts();
+       
         const product = products.find(p => p.id === productId);
         
         if (product) {
