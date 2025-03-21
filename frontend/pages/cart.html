@@ -30,48 +30,29 @@
         </div>
     </nav>
 
-    <!-- Cart Header -->
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Shopping Cart</h1>
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <!-- Cart Items -->
-            <div class="space-y-4">
-                <div class="flex items-center justify-between border-b pb-4">
-                    <div class="flex items-center">
-                        <img src="https://placehold.co/100x100" alt="Product Image" class="w-20 h-20 rounded-lg">
-                        <div class="ml-4">
-                            <h2 class="font-semibold text-lg">MacBook Pro 13"</h2>
-                            <p class="text-gray-600">$1,299.99</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <input type="number" value="1" min="1" class="w-12 text-center border rounded-md">
-                        <span class="font-semibold text-gray-800">$1,299.99</span>
-                        <button class="text-red-500 hover:text-red-700"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-            </div>
+<!-- Cart Page -->
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Shopping Cart</h1>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <!-- Cart Items -->
+        <div id="cart-items" class="space-y-4"></div>
+        
+        <!-- Empty Cart Message -->
+        <p id="cart-empty" class="text-gray-600 text-center hidden">Your cart is empty.</p>
 
-            <!-- Cart Summary -->
-            <div class="mt-6">
-                <h2 class="text-xl font-bold mb-4">Order Summary</h2>
-                <div class="flex justify-between mb-2">
-                    <span>Subtotal</span>
-                    <span>$1,299.99</span>
-                </div>
-                <div class="flex justify-between mb-2">
-                    <span>Tax (5%)</span>
-                    <span>$65.00</span>
-                </div>
-                <div class="flex justify-between font-bold text-lg">
-                    <span>Total</span>
-                    <span>$1,364.99</span>
-                </div>
-                <button class="w-full bg-blue-600 text-white py-2 mt-4 rounded-lg hover:bg-blue-700">Proceed to Checkout</button>
+        <!-- Cart Summary -->
+        <div class="mt-6">
+            <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+            <div class="flex justify-between mb-2">
+                <span>Subtotal</span>
+                <span id="cart-total">$0.00</span>
             </div>
+            <button id="checkout-button" class="w-full bg-blue-600 text-white py-2 mt-4 rounded-lg hover:bg-blue-700">
+                Proceed to Checkout
+            </button>
         </div>
     </div>
-
+</div>
     <!-- Footer -->
  
     <!-- Footer -->
@@ -144,3 +125,5 @@
     </footer>
 </body>
 </html>
+
+<script src="../js/app.js" defer></script>
