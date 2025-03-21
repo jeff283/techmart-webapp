@@ -171,7 +171,7 @@ function renderProductList(products) {
                         <a href="product-detail.html?id=${product._id}" 
                            class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300">Details</a>
                         <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" 
-                                onclick="addToCart(${product._id})">Add to Cart</button>
+                                onclick="addToCart('${product._id}')">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -285,25 +285,7 @@ function renderProductDetails(product) {
     }
 }
 
-// Function used by addToCart button
-function addToCart(productId) {
-    // Find the product by ID
-    const product = products.find(p => p.id === productId);
-    
-    if (!product) {
-        console.error('Product not found:', productId);
-        return;
-    }
-    
-    // Dispatch custom event for app.js to handle
-    const event = new CustomEvent('addToCart', {
-        detail: { product: product, quantity: 1 }
-    });
-    document.dispatchEvent(event);
-    
-    // Show confirmation message
-    showToast(`${product.name} added to cart!`);
-}
+
 
 // Show a toast notification
 function showToast(message) {
