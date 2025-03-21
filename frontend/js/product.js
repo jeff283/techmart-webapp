@@ -189,7 +189,9 @@ function renderProductList(products) {
 // Load product details for the product detail page
 function loadProductDetails() {
     const urlParams = new URLSearchParams(window.location.search);
-    const productId = parseInt(urlParams.get('id'));
+    console.log("urlParams: ", urlParams);
+    const productId = urlParams.get('id');
+    console.log("productId: ", productId);
     
     if (!productId) {
         window.location.href = 'product-list.html';
@@ -209,7 +211,7 @@ function loadProductDetails() {
     // If product wasn't found
     if (!product) {
         // Try to fetch it directly
-        fetchProductDetails(productId);
+        console.error("Product not found in loaded products");
         return;
     }
     
@@ -219,6 +221,7 @@ function loadProductDetails() {
 
 // Fetch a single product's details from API
 async function fetchProductDetails(productId) {
+    console.log("product ID: ", productId);
     try {
         const response = await fetch(`${baseUrl}/api/products/${productId}`);
         
@@ -271,6 +274,7 @@ function renderProductDetails(product) {
     document.getElementById('product-name').textContent = product.name;
     document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
     document.getElementById('product-description').textContent = product.description;
+    document.getElementById('product-breadcrumb').textContent = product.name;
     
     // Set up the add to cart button
     const addToCartButton = document.getElementById('add-to-cart-button');
