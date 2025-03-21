@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Load product details
         loadProductDetails();
     }
+
+    // Check if we're on add product  page
+    if (window.location.pathname.includes('add-product.html')) {
+        const productForm = document.getElementById("add-product-form");
+        if (productForm) {
+            productForm.addEventListener("submit", submitProductForm);
+        }
+    }
 });
 
 // Set up product-specific event listeners
@@ -286,7 +294,6 @@ function renderProductDetails(product) {
 }
 
 
-
 // Show a toast notification
 function showToast(message) {
     // Check if a toast container already exists
@@ -321,4 +328,60 @@ function showToast(message) {
             toastContainer.removeChild(toast);
         }, 500);
     }, 3000);
+}
+
+
+
+// Function to handle product form submission
+async function submitProductForm(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Capture form inputs
+    const name = document.getElementById("product-name").value.trim();
+    const description = document.getElementById("description").value.trim();
+    const price = parseFloat(document.getElementById("price").value);
+    const stock = parseInt(document.getElementById("stock-quantity").value);
+    const category = document.getElementById("product-category").value;
+    const image = `https://placehold.co/600x400?text=${name}`
+    const featured = document.getElementById("product-featured") 
+        ? document.getElementById("product-featured").checked 
+        : false;
+
+    // Validate required fields
+    if (!name || !description || isNaN(price) || isNaN(stock) || !category) {
+        showNotification("Please fill in all required fields.");
+        return;
+    }
+
+    // Construct product object
+    const productData = {
+        name,
+        description,
+        price,
+        stock,
+        image,
+        category,
+        featured
+    };
+
+    try {
+        // Send data to API
+        const response = await fetch(`${baseUrl}/api/products`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(productData)
+        });
+
+        if (response.ok) {
+            showNotification("Product added successfully!");
+            document.getElementById("add-product-form").reset(); // Reset the form
+        } else {
+            showNotification("Failed to add product.");
+        }
+    } catch (error) {
+        console.error("Error submitting product:", error);
+        showNotification("An error occurred. Please try again.");
+    }
 }
