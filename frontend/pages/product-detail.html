@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail - TechMart</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-laptop-code text-2xl"></i>
+                    <span class="font-bold text-xl">TechMart</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="hover:text-blue-200">Home</a>
+                    <a href="product-list.html" class="hover:text-blue-200 font-medium">Products</a>
+                    <a href="../index.html#about" class="hover:text-blue-200">About Us</a>
+                    <a href="orders.html" class="hover:text-blue-200">My Orders</a>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:block">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="Search products..." class="px-4 py-1 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <button class="absolute right-0 top-0 mt-1 mr-3" id="search-button">
+                            <i class="fas fa-search text-gray-500"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu and Cart -->
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html" class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs" id="cart-count">0</span>
+                    </a>
+                    <button class="md:hidden focus:outline-none" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu (hidden by default) -->
+            <div class="md:hidden hidden mt-3 space-y-2" id="mobile-menu">
+                <a href="../index.html" class="block hover:bg-blue-700 px-3 py-2 rounded">Home</a>
+                <a href="product-list.html" class="block hover:bg-blue-700 px-3 py-2 rounded">Products</a>
+                <a href="../index.html#about" class="block hover:bg-blue-700 px-3 py-2 rounded">About Us</a>
+                <a href="orders.html" class="block hover:bg-blue-700 px-3 py-2 rounded">My Orders</a>
+                <div class="pt-2">
+                    <input type="text" id="mobile-search-input" placeholder="Search products..." class="w-full px-4 py-1 rounded-full text-gray-800 focus:outline-none">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header - Breadcrumbs -->
+    <div class="bg-gray-100 py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex text-sm breadcrumbs">
+                <a href="../index.html" class="text-blue-600 hover:underline">Home</a>
+                <span class="mx-2">/</span>
+                <a href="product-list.html" class="text-blue-600 hover:underline">Products</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-600" id="product-breadcrumb">MacBook Pro 13"</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Product Detail Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex flex-col lg:flex-row">
+                <!-- Product Images Gallery - Left Side -->
+                <div class="lg:w-2/5 mb-6 lg:mb-0">
+                    <!-- Main Product Image -->
+                    <div class="mb-4 border rounded-lg overflow-hidden">
+                        <img src="https://placehold.co/600x400" alt="MacBook Pro 13" id="main-product-image" class="w-full h-auto">
+                    </div>
+                    
+                    <!-- Thumbnail Images -->
+                    <div class="flex space-x-2">
+                        <div class="w-1/4 border rounded-lg overflow-hidden cursor-pointer product-thumbnail active">
+                            <img src="https://placehold.co/600x400" alt="Product view 1" class="w-full h-auto" onclick="changeImage(this.src)">
+                        </div>
+                        <div class="w-1/4 border rounded-lg overflow-hidden cursor-pointer product-thumbnail">
+                            <img src="https://placehold.co/600x400?text=Side" alt="Product view 2" class="w-full h-auto" onclick="changeImage(this.src)">
+                        </div>
+                        <div class="w-1/4 border rounded-lg overflow-hidden cursor-pointer product-thumbnail">
+                            <img src="https://placehold.co/600x400?text=Top" alt="Product view 3" class="w-full h-auto" onclick="changeImage(this.src)">
+                        </div>
+                        <div class="w-1/4 border rounded-lg overflow-hidden cursor-pointer product-thumbnail">
+                            <img src="https://placehold.co/600x400?text=Back" alt="Product view 4" class="w-full h-auto" onclick="changeImage(this.src)">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Information - Right Side -->
+                <div class="lg:w-3/5 lg:pl-8">
+                    <!-- Product Status and Ratings -->
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">In Stock</span>
+                        <div class="flex items-center">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-1">(128 Reviews)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Title and Brand -->
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">MacBook Pro 13"</h1>
+                    <p class="text-gray-600 mb-4">By <a href="#" class="text-blue-600 hover:underline">Apple</a></p>
+                    
+                    <!-- Product Price -->
+                    <div class="flex items-baseline mb-6">
+                        <span class="text-3xl font-bold text-blue-600 mr-2">$1,299.99</span>
+                        <span class="text-lg text-gray-500 line-through">$1,499.99</span>
+                        <span class="bg-red-100 text-red-800 text-xs font-semibold ml-2 px-2.5 py-0.5 rounded">Save $200</span>
+                    </div>
+                    
+                    <!-- Short Description -->
+                    <p class="text-gray-700 mb-6">
+                        The latest MacBook Pro featuring the M2 chip with 8-core CPU, 10-core GPU, and up to 24GB unified memory. Experience incredible performance for demanding workflows like photo editing, coding, and creating presentations.
+                    </p>
+                    
+                    <!-- Color Selection -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-gray-900 mb-2">Color</h3>
+                        <div class="flex space-x-3">
+                            <div class="color-option active border-2 border-blue-600 rounded-full p-0.5">
+                                <div class="bg-gray-800 rounded-full w-6 h-6" data-color="Space Gray"></div>
+                            </div>
+                            <div class="color-option border-2 border-gray-300 rounded-full p-0.5">
+                                <div class="bg-gray-200 rounded-full w-6 h-6" data-color="Silver"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Configuration Options -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-gray-900 mb-2">Configuration</h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="config-option active border border-blue-600 rounded p-2 text-center bg-blue-50">
+                                <span class="font-semibold">8GB / 256GB</span>
+                                <p class="text-sm text-gray-600">$1,299.99</p>
+                            </div>
+                            <div class="config-option border border-gray-300 rounded p-2 text-center hover:border-blue-600">
+                                <span class="font-semibold">16GB / 512GB</span>
+                                <p class="text-sm text-gray-600">$1,699.99</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quantity Selector -->
+                    <div class="flex items-center mb-6">
+                        <label for="quantity" class="text-sm font-semibold text-gray-900 mr-4">Quantity</label>
+                        <div class="flex items-center border border-gray-300 rounded">
+                            <button class="px-3 py-1 bg-gray-100 hover:bg-gray-200" id="decrease-quantity">-</button>
+                            <input type="number" id="quantity" value="1" min="1" class="w-12 py-1 text-center border-x border-gray-300">
+                            <button class="px-3 py-1 bg-gray-100 hover:bg-gray-200" id="increase-quantity">+</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-4 mb-6">
+                        <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded font-semibold">
+                            <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+                        </button>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 px-4 rounded font-semibold">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Delivery Info -->
+                    <div class="border-t border-gray-200 pt-4">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-truck text-gray-500 mr-2"></i>
+                            <span class="text-sm text-gray-700">Free shipping for orders over $50</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-undo text-gray-500 mr-2"></i>
+                            <span class="text-sm text-gray-700">Free 30-day returns</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product Details Tabs -->
+        <div class="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
+            <div class="border-b border-gray-200">
+                <nav class="flex -mb-px" aria-label="Tabs">
+                    <button class="tab-button active border-blue-600 text-blue-600 whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm" data-tab="description">
+                        Description
+                    </button>
+                    <button class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm" data-tab="specifications">
+                        Specifications
+                    </button>
+                    <button class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm" data-tab="reviews">
+                        Reviews (128)
+                    </button>
+                </nav>
+            </div>
+            
+            <!-- Description Tab Content -->
+            <div id="description-content" class="tab-content active p-6">
+                <h2 class="text-xl font-bold mb-4">Product Description</h2>
+                <div class="text-gray-700 space-y-4">
+                    <p>
+                        The new MacBook Pro delivers game-changing performance for pro users. With the powerful M2 chip, you get groundbreaking performance and amazing battery life. It features a stunning Retina display, a Magic Keyboard, and versatile connectivity for everyday use.
+                    </p>
+                    <p>
+                        <strong>Revolutionary Apple silicon</strong><br>
+                        The M2 chip begins the next chapter for Apple silicon, which has transformed the Mac lineup. With incredible performance, custom technologies, and industry-leading power efficiency, M2 is the next generation of Apple silicon for Mac.
+                    </p>
+                    <p>
+                        <strong>Up to 20 hours of battery life</strong><br>
+                        The efficiency of the M2 chip allows MacBook Pro to deliver the same extraordinary battery life as the previous generation: up to 20 hours of video playback.
+                    </p>
+                    <p>
+                        <strong>Active cooling system</strong><br>
+                        The active cooling system sustains incredible performance. Thanks to its advanced thermal system and the efficiency of Apple silicon, MacBook Pro can sustain pro levels of performance, so you can run CPU- and GPU-intensive tasks for hours on end.
+                    </p>
+                    <p>
+                        <strong>Retina display</strong><br>
+                        The 13.3-inch Retina display features 500 nits of brightness and P3 wide color for vibrant images and incredible detail. True Tone technology automatically adjusts the white point of the display to match the color temperature of your environment, making web pages and email look as natural as the printed page.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Specifications Tab Content -->
+            <div id="specifications-content" class="tab-content hidden p-6">
+                <h2 class="text-xl font-bold mb-4">Technical Specifications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Processor & Memory Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Processor & Memory</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Chip</span>
+                                <span class="font-medium">Apple M2</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">CPU</span>
+                                <span class="font-medium">8-core (4 performance, 4 efficiency)</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">GPU</span>
+                                <span class="font-medium">10-core</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Neural Engine</span>
+                                <span class="font-medium">16-core</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">RAM</span>
+                                <span class="font-medium">8GB unified memory</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Storage & Display Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Storage & Display</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Storage</span>
+                                <span class="font-medium">256GB SSD</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Display</span>
+                                <span class="font-medium">13.3-inch Retina display</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Resolution</span>
+                                <span class="font-medium">2560 x 1600 pixels</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Brightness</span>
+                                <span class="font-medium">500 nits</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Color</span>
+                                <span class="font-medium">P3 wide color gamut</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Battery & Power Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Battery & Power</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Battery Life</span>
+                                <span class="font-medium">Up to 20 hours</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Battery</span>
+                                <span class="font-medium">58.2-watt-hour lithium-polymer</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Power Adapter</span>
+                                <span class="font-medium">67W USB-C Power Adapter</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Connectivity Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Connectivity</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Ports</span>
+                                <span class="font-medium">Two Thunderbolt / USB 4 ports</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Wi-Fi</span>
+                                <span class="font-medium">Wi-Fi 6 (802.11ax)</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Bluetooth</span>
+                                <span class="font-medium">Bluetooth 5.0</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Audio</span>
+                                <span class="font-medium">Stereo speakers, 3.5mm headphone jack</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Physical Specs Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Physical Specifications</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Dimensions</span>
+                                <span class="font-medium">11.97 x 8.36 x 0.61 inches</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Weight</span>
+                                <span class="font-medium">3.0 pounds (1.4 kg)</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Colors</span>
+                                <span class="font-medium">Space Gray, Silver</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Software Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Software</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Operating System</span>
+                                <span class="font-medium">macOS Ventura</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Included Apps</span>
+                                <span class="font-medium">Pages, Numbers, Keynote, Photos, iMovie, GarageBand</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reviews Tab Content -->
+            <div id="reviews-content" class="tab-content hidden p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold">Customer Reviews</h2>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Write a Review</button>
+                </div>
+                
+                <!-- Reviews Summary -->
+                <div class="flex flex-col md:flex-row mb-8">
+                    <!-- Overall Rating -->
+                    <div class="md:w-1/3 mb-4 md:mb-0">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-gray-800 mb-2">4.5</div>
+                            <div class="flex justify-center text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="text-gray-600">Based on 128 reviews</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Rating Breakdown -->
+                    <div class="md:w-2/3">
+                        <div class="space-y-2">
+                            <!-- 5 Star -->
+                            <div class="flex items-center">
+                                <span class="text-sm w-8">5★</span>
+                                <div class="flex-1 h-4 mx-2 bg-gray-200 rounded">
+                                    <div class="h-4 bg-green-500 rounded" style="width: 70%"></div>
+                                </div>
+                                <span class="text-sm w-8 text-right">70%</span>
+                            </div>
+                            
+                            <!-- 4 Star -->
+                            <div class="flex items-center">
+                                <span class="text-sm w-8">4★</span>
+                                <div class="flex-1 h-4 mx-2 bg-gray-200 rounded">
+                                    <div class="h-4 bg-green-500 rounded" style="width: 20%"></div>
+                                </div>
+                                <span class="text-sm w-8 text-right">20%</span>
+                            </div>
+                            
+                            <!-- 3 Star -->
+                            <div class="flex items-center">
+                                <span class="text-sm w-8">3★</span>
+                                <div class="flex-1 h-4 mx-2 bg-gray-200 rounded">
+                                    <div class="h-4 bg-yellow-400 rounded" style="width: 5%"></div>
+                                </div>
+                                <span class="text-sm w-8 text-right">5%</span>
+                            </div>
+                            
+                            <!-- 2 Star -->
+                            <div class="flex items-center">
+                                <span class="text-sm w-8">2★</span>
+                                <div class="flex-1 h-4 mx-2 bg-gray-200 rounded">
+                                    <div class="h-4 bg-red-400 rounded" style="width: 3%"></div>
+                                </div>
+                                <span class="text-sm w-8 text-right">3%</span>
+                            </div>
+                            
+                            <!-- 1 Star -->
+                            <div class="flex items-center">
+                                <span class="text-sm w-8">1★</span>
+                                <div class="flex-1 h-4 mx-2 bg-gray-200 rounded">
+                                    <div class="h-4 bg-red-500 rounded" style="width: 2%"></div>
+                                </div>
+                                <span class="text-sm w-8 text-right">2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review Filter Controls -->
+                <div class="flex flex-wrap items-center gap-2 mb-6">
+                    <span class="text-gray-700">Filter reviews:</span>
+                    <button class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full active">All</button>
+                    <button class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-blue-100 hover:text-blue-800">5 Star</button>
+                    <button class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-blue-100 hover:text-blue-800">4 Star</button>
+                    <button class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-blue-100 hover:text-blue-800">3 Star</button>
+                    <button class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-blue-100 hover:text-blue-800">2 Star</button>
+                    <button class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-blue-100 hover:text-blue-800">1 Star</button>
+                    <select class="ml-auto border rounded p-1 text-sm">
+                        <option>Most Recent</option>
+                        <option>Highest Rated</option>
+                        <option>Lowest Rated</option>
+                    </select>
+                </div>
+                
+                <!-- Individual Reviews -->
+                <div class="space-y-6">
+                    <!-- Review 1 -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <div class="flex items-center">
+                                    <div class="text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <h3 class="ml-2 text-lg font-semibold">Amazing performance!</h3>
+                                </div>
+                                <p class="text-sm text-gray-600">by Alex J. on March 10, 2025</p>
+                            </div>
+                            <div class="text-sm">
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded">Verified Purchase</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">
+                            I've been using this MacBook Pro for a month now and I'm incredibly impressed with the performance. The M2 chip is blazing fast for everything I do - from coding to video editing. Battery life is exceptional too, easily lasting a full workday. The build quality is premium as expected, and the keyboard feels great to type on.
+                        </p>
+                        <div class="mt-3">
+                            <span class="text-gray-600 text-sm mr-4">Was this review helpful?</span>
+                            <button class="text-sm px-3 py-1 border rounded mr-2 hover:bg-gray-100">Yes</button>
+                            <button class="text-sm px-3 py-1 border rounded hover:bg-gray-100">No</button>
+                        </div>
+                    </div>
+                    
+                  <!-- Review 2 - Completing from where it cut off -->
+<div class="border-b border-gray-200 pb-6">
+    <div class="flex justify-between items-start mb-2">
+        <div>
+            <div class="flex items-center">
+                <div class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <h3 class="ml-2 text-lg font-semibold">Great laptop but expected more</h3>
+            </div>
+            <p class="text-sm text-gray-600">by Jamie T. on February 28, 2025</p>
+        </div>
+        <div class="text-sm">
+            <span class="bg-green-100 text-green-800 px-2 py-1 rounded">Verified Purchase</span>
+        </div>
+    </div>
+    <p class="text-gray-700">
+        I'm generally happy with my purchase. The M2 chip delivers excellent performance for my daily tasks and the battery life is impressive. However, I was expecting more storage for the price point. 256GB fills up quickly if you work with large files. The display is beautiful but I wish it had more ports without needing dongles.
+    </p>
+    <div class="mt-3">
+        <span class="text-gray-600 text-sm mr-4">Was this review helpful?</span>
+        <button class="text-sm px-3 py-1 border rounded mr-2 hover:bg-gray-100">Yes</button>
+        <button class="text-sm px-3 py-1 border rounded hover:bg-gray-100">No</button>
+    </div>
+</div>
+
+<!-- Review 3 -->
+<div class="pb-6">
+    <div class="flex justify-between items-start mb-2">
+        <div>
+            <div class="flex items-center">
+                <div class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <h3 class="ml-2 text-lg font-semibold">Good but overpriced</h3>
+            </div>
+            <p class="text-sm text-gray-600">by Michael R. on March 5, 2025</p>
+        </div>
+        <div class="text-sm">
+            <span class="bg-green-100 text-green-800 px-2 py-1 rounded">Verified Purchase</span>
+        </div>
+    </div>
+    <p class="text-gray-700">
+        The MacBook Pro is well-built and performs adequately for most tasks. However, I believe it's significantly overpriced for what you get, especially in the base configuration. The 256GB storage is too small for professional work, and upgrading is extremely expensive. Battery life is the standout feature, but there are Windows alternatives that offer better value.
+    </p>
+    <div class="mt-3">
+        <span class="text-gray-600 text-sm mr-4">Was this review helpful?</span>
+        <button class="text-sm px-3 py-1 border rounded mr-2 hover:bg-gray-100">Yes</button>
+        <button class="text-sm px-3 py-1 border rounded hover:bg-gray-100">No</button>
+    </div>
+</div>
+
+<!-- Load More Button -->
+<div class="text-center mt-8">
+    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded">
+        Load More Reviews
+    </button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Related Products Section -->
+<h2 class="text-2xl font-bold mb-6">You May Also Like</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <!-- Related Product 1 -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+            <img src="https://placehold.co/300x200" alt="MacBook Air" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <div class="text-yellow-400 text-sm mb-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-gray-600 ml-1">(96)</span>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-1">MacBook Air 13"</h3>
+                <p class="text-sm text-gray-600 mb-2">Apple</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-blue-600 font-bold">$999.99</span>
+                    <button class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Related Product 2 -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+            <img src="https://placehold.co/300x200" alt="iPad Pro" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <div class="text-yellow-400 text-sm mb-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 ml-1">(78)</span>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-1">iPad Pro 11"</h3>
+                <p class="text-sm text-gray-600 mb-2">Apple</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-blue-600 font-bold">$799.99</span>
+                    <button class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Related Product 3 -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+            <img src="https://placehold.co/300x200" alt="AirPods Pro" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <div class="text-yellow-400 text-sm mb-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="text-gray-600 ml-1">(124)</span>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-1">AirPods Pro</h3>
+                <p class="text-sm text-gray-600 mb-2">Apple</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-blue-600 font-bold">$249.99</span>
+                    <button class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Related Product 4 -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+            <img src="https://placehold.co/300x200" alt="Apple Watch" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <div class="text-yellow-400 text-sm mb-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-gray-600 ml-1">(86)</span>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-1">Apple Watch Series 8</h3>
+                <p class="text-sm text-gray-600 mb-2">Apple</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-blue-600 font-bold">$399.99</span>
+                    <button class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- Recently Viewed Section -->
+<h2 class="text-2xl font-bold mb-6">Recently Viewed</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <!-- Recently Viewed Product 1 -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+            <img src="https://placehold.co/300x200" alt="iMac" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <div class="text-yellow-400 text-sm mb-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="text-gray-600 ml-1">(42)</span>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-1">iMac 24"</h3>
+                <p class="text-sm text-gray-600 mb-2">Apple</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-blue-600 font-bold">$1,299.99</span>
+                    <button class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Recently Viewed Product 2 -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="#">
+            <img src="https://placehold.co/300x200" alt="Mac mini" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <div class="text-yellow-400 text-sm mb-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="text-gray-600 ml-1">(37)</span>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-1">Mac mini</h3>
+                <p class="text-sm text-gray-600 mb-2">Apple</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-blue-600 font-bold">$599.99</span>
+                    <button class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">TechMart</h3>
+                    <p class="text-gray-400 mb-4">
+                        Your trusted destination for premium electronics and tech accessories.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="product-list.html" class="text-gray-400 hover:text-white">Products</a></li>
+                        <li><a href="../index.html#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white">My Orders</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Categories -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="product-list.html?category=laptops" class="text-gray-400 hover:text-white">Laptops</a></li>
+                        <li><a href="product-list.html?category=smartphones" class="text-gray-400 hover:text-white">Smartphones</a></li>
+                        <li><a href="product-list.html?category=accessories" class="text-gray-400 hover:text-white">Accessories</a></li>
+                        <li><a href="product-list.html?category=wearables" class="text-gray-400 hover:text-white">Wearables</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Tech Street, Berlin, Germany</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                            <span>+49 123 456 7890</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3"></i>
+                            <span>support@techmart.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-gray-700 mb-6">
+            
+            <!-- Copyright -->
+            <div class="text-center text-gray-400">
+                <p>&copy; 2025 TechMart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<!-- JavaScript for Tab Switching, Image Gallery, and Quantity Controls -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tab Switching
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Deactivate all tabs
+                tabButtons.forEach(btn => btn.classList.remove('active', 'border-blue-600', 'text-blue-600'));
+                tabButtons.forEach(btn => btn.classList.add('border-transparent', 'text-gray-500'));
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                // Activate clicked tab
+                button.classList.remove('border-transparent', 'text-gray-500');
+                button.classList.add('active', 'border-blue-600', 'text-blue-600');
+                
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(`${tabId}-content`).classList.remove('hidden');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+        
+        // Image Gallery
+        const thumbnails = document.querySelectorAll('.product-thumbnail');
+        const mainImage = document.getElementById('main-product-image');
+        
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                // Remove active class from all thumbnails
+                thumbnails.forEach(t => t.classList.remove('active', 'border-blue-600'));
+                
+                // Add active class to clicked thumbnail
+                thumb.classList.add('active', 'border-blue-600');
+                
+                // Change main image
+                const imgSrc = thumb.querySelector('img').src;
+                mainImage.src = imgSrc;
+            });
+        });
+        
+        // Quantity Control
+        const quantityInput = document.getElementById('quantity');
+        const increaseBtn = document.getElementById('increase-quantity');
+        const decreaseBtn = document.getElementById('decrease-quantity');
+        
+        increaseBtn.addEventListener('click', () => {
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        });
+        
+        decreaseBtn.addEventListener('click', () => {
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Color Selection
+        const colorOptions = document.querySelectorAll('.color-option');
+        
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove active class from all options
+                colorOptions.forEach(opt => opt.classList.remove('active', 'border-blue-600'));
+                colorOptions.forEach(opt => opt.classList.add('border-gray-300'));
+                
+                // Add active class to clicked option
+                option.classList.remove('border-gray-300');
+                option.classList.add('active', 'border-blue-600');
+                
+                // Update selected color text (if needed)
+                const colorName = option.querySelector('div').getAttribute('data-color');
+                console.log(`Selected color: ${colorName}`);
+            });
+        });
+        
+        // Configuration Options
+        const configOptions = document.querySelectorAll('.config-option');
+        
+        configOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove active class from all options
+                configOptions.forEach(opt => opt.classList.remove('active', 'border-blue-600', 'bg-blue-50'));
+                configOptions.forEach(opt => opt.classList.add('border-gray-300'));
+                
+                // Add active class to clicked option
+                option.classList.remove('border-gray-300');
+                option.classList.add('active', 'border-blue-600', 'bg-blue-50');
+            });
+        });
+        
+        // Function to change main image (called from thumbnail onclick)
+        window.changeImage = function(src) {
+            mainImage.src = src;
+        };
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - TechMart</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-laptop-code text-2xl"></i>
+                    <span class="font-bold text-xl">TechMart</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="hover:text-blue-200">Home</a>
+                    <a href="product-list.html" class="hover:text-blue-200 font-medium">Products</a>
+                    <a href="../index.html#about" class="hover:text-blue-200">About Us</a>
+                    <a href="orders.html" class="hover:text-blue-200">My Orders</a>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:block">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="Search products..." class="px-4 py-1 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <button class="absolute right-0 top-0 mt-1 mr-3" id="search-button">
+                            <i class="fas fa-search text-gray-500"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu and Cart -->
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html" class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs" id="cart-count">0</span>
+                    </a>
+                    <button class="md:hidden focus:outline-none" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu (hidden by default) -->
+            <div class="md:hidden hidden mt-3 space-y-2" id="mobile-menu">
+                <a href="../index.html" class="block hover:bg-blue-700 px-3 py-2 rounded">Home</a>
+                <a href="product-list.html" class="block hover:bg-blue-700 px-3 py-2 rounded">Products</a>
+                <a href="../index.html#about" class="block hover:bg-blue-700 px-3 py-2 rounded">About Us</a>
+                <a href="orders.html" class="block hover:bg-blue-700 px-3 py-2 rounded">My Orders</a>
+                <div class="pt-2">
+                    <input type="text" id="mobile-search-input" placeholder="Search products..." class="w-full px-4 py-1 rounded-full text-gray-800 focus:outline-none">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="bg-gray-100 py-6">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800">All Products</h1>
+            <div class="flex text-sm breadcrumbs">
+                <a href="../index.html" class="text-blue-600 hover:underline">Home</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-600">Products</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row">
+            <!-- Filters Section - Left Side -->
+            <div class="lg:w-1/4 mb-6 lg:mb-0 lg:pr-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="text-xl font-bold mb-4">Filters</h2>
+                    
+                    <!-- Category Filter -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Categories</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="category-laptops" class="category-filter mr-2" value="laptops">
+                                <label for="category-laptops">Laptops</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="category-smartphones" class="category-filter mr-2" value="smartphones">
+                                <label for="category-smartphones">Smartphones</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="category-accessories" class="category-filter mr-2" value="accessories">
+                                <label for="category-accessories">Accessories</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="category-wearables" class="category-filter mr-2" value="wearables">
+                                <label for="category-wearables">Wearables</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Price Range Filter -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Price Range</h3>
+                        <div class="space-y-2">
+                            <div>
+                                <label for="min-price" class="block text-sm text-gray-600">Min Price:</label>
+                                <input type="number" id="min-price" class="w-full rounded border-gray-300 p-2" placeholder="$0">
+                            </div>
+                            <div>
+                                <label for="max-price" class="block text-sm text-gray-600">Max Price:</label>
+                                <input type="number" id="max-price" class="w-full rounded border-gray-300 p-2" placeholder="$2000">
+                            </div>
+                        </div>
+                        <button id="apply-price-filter" class="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-700 w-full">Apply</button>
+                    </div>
+                    
+                    <!-- Rating Filter -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2">Rating</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="rating-4-plus" class="rating-filter mr-2" value="4">
+                                <label for="rating-4-plus" class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="far fa-star text-yellow-400"></i>
+                                    <span class="ml-1">& up</span>
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="rating-3-plus" class="rating-filter mr-2" value="3">
+                                <label for="rating-3-plus" class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="far fa-star text-yellow-400"></i>
+                                    <i class="far fa-star text-yellow-400"></i>
+                                    <span class="ml-1">& up</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand Filter -->
+                    <div>
+                        <h3 class="font-semibold mb-2">Brands</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="brand-apple" class="brand-filter mr-2" value="apple">
+                                <label for="brand-apple">Apple</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="brand-samsung" class="brand-filter mr-2" value="samsung">
+                                <label for="brand-samsung">Samsung</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="brand-dell" class="brand-filter mr-2" value="dell">
+                                <label for="brand-dell">Dell</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="brand-sony" class="brand-filter mr-2" value="sony">
+                                <label for="brand-sony">Sony</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Clear All Filters Button -->
+                    <button id="clear-filters" class="bg-gray-200 text-gray-800 px-4 py-2 rounded mt-6 hover:bg-gray-300 w-full">Clear All Filters</button>
+                </div>
+            </div>
+            
+            <!-- Products Display - Right Side -->
+            <div class="lg:w-3/4">
+                <!-- Sort and View Controls -->
+                <div class="bg-white p-4 rounded-lg shadow mb-6 flex flex-col sm:flex-row justify-between items-center">
+                    <div class="flex items-center mb-4 sm:mb-0">
+                        <label for="sort-by" class="mr-2">Sort by:</label>
+                        <select id="sort-by" class="rounded border-gray-300 p-1">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span>View:</span>
+                        <button id="grid-view" class="text-blue-600 focus:outline-none">
+                            <i class="fas fa-th text-lg"></i>
+                        </button>
+                        <button id="list-view" class="text-gray-400 focus:outline-none">
+                            <i class="fas fa-list text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Products Grid -->
+                <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Product 1 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300" data-category="laptops" data-price="1299.99" data-rating="4.5" data-brand="apple">
+                        <img src="https://placehold.co/300x200" alt="Product" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <div class="text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="text-gray-600 text-sm ml-1">(128)</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">MacBook Pro 13"</h3>
+                            <p class="text-gray-600 mb-4">Latest model with Apple M2 chip, 8GB RAM, 256GB SSD</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-600 font-bold">$1,299.99</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onclick="addToCart(101)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300" data-category="smartphones" data-price="899.99" data-rating="4.8" data-brand="samsung">
+                        <img src="https://placehold.co/300x200" alt="Product" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <div class="text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-gray-600 text-sm ml-1">(95)</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Samsung Galaxy S23</h3>
+                            <p class="text-gray-600 mb-4">6.1" Display, 128GB Storage, 8GB RAM, 50MP Camera</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-600 font-bold">$899.99</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onclick="addToCart(102)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300" data-category="accessories" data-price="249.99" data-rating="4.3" data-brand="sony">
+                        <img src="https://placehold.co/300x200" alt="Product" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <div class="text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-gray-600 text-sm ml-1">(74)</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Sony WH-1000XM5</h3>
+                            <p class="text-gray-600 mb-4">Wireless Premium Noise Cancelling Headphones</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-600 font-bold">$249.99</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onclick="addToCart(103)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300" data-category="wearables" data-price="399.99" data-rating="4.6" data-brand="apple">
+                        <img src="https://placehold.co/300x200" alt="Product" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <div class="text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="text-gray-600 text-sm ml-1">(112)</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Apple Watch Series 8</h3>
+                            <p class="text-gray-600 mb-4">GPS, 41mm Aluminum Case with Sport Band</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-600 font-bold">$399.99</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onclick="addToCart(104)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300" data-category="laptops" data-price="849.99" data-rating="4.2" data-brand="dell">
+                        <img src="https://placehold.co/300x200" alt="Product" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <div class="text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-gray-600 text-sm ml-1">(63)</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Dell XPS 13</h3>
+                            <p class="text-gray-600 mb-4">13.3" FHD Display, Intel Core i5, 8GB RAM, 256GB SSD</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-600 font-bold">$849.99</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onclick="addToCart(105)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 6 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300" data-category="accessories" data-price="129.99" data-rating="4.1" data-brand="samsung">
+                        <img src="https://placehold.co/300x200" alt="Product" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <div class="text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-gray-600 text-sm ml-1">(87)</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Samsung Galaxy Buds Pro</h3>
+                            <p class="text-gray-600 mb-4">Wireless Earbuds with Active Noise Cancellation</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-600 font-bold">$129.99</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onclick="addToCart(106)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- No Results Message (hidden by default) -->
+                <div id="no-results" class="hidden text-center py-10">
+                    <i class="fas fa-search text-5xl text-gray-300 mb-4"></i>
+                    <h3 class="text-2xl font-semibold text-gray-600">No products found</h3>
+                    <p class="text-gray-500 mt-2">Try adjusting your filter criteria</p>
+                    <button id="reset-search" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Reset Filters</button>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="mt-8 flex justify-center">
+                    <nav class="inline-flex rounded-md shadow">
+                        <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">Previous</a>
+                        <a href="#" class="py-2 px-4 bg-blue-600 text-white border border-blue-600">1</a>
+                        <a href="#" class="py-2 px-4 bg-white border border-gray-300 hover:bg-gray-50">2</a>
+                        <a href="#" class="py-2 px-4 bg-white border border-gray-300 hover:bg-gray-50">3</a>
+                        <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">Next</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recently Viewed Products -->
+    <section class="bg-white py-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">Recently Viewed</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Recently Viewed Product 1 -->
+                <div class="bg-white border rounded-lg overflow-hidden hover:shadow-md transition duration-300">
+                    <img src="https://placehold.co/300x200" alt="Product" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <h3 class="font-semibold text-sm mb-1">MacBook Pro 13"</h3>
+                        <span class="text-blue-600 font-bold text-sm">$1,299.99</span>
+                    </div>
+                </div>
+                
+                <!-- Recently Viewed Product 2 -->
+                <div class="bg-white border rounded-lg overflow-hidden hover:shadow-md transition duration-300">
+                    <img src="https://placehold.co/300x200" alt="Product" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <h3 class="font-semibold text-sm mb-1">Samsung Galaxy S23</h3>
+                        <span class="text-blue-600 font-bold text-sm">$899.99</span>
+                    </div>
+                </div>
+                
+                <!-- Recently Viewed Product 3 -->
+                <div class="bg-white border rounded-lg overflow-hidden hover:shadow-md transition duration-300">
+                    <img src="https://placehold.co/300x200" alt="Product" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <h3 class="font-semibold text-sm mb-1">Sony WH-1000XM5</h3>
+                        <span class="text-blue-600 font-bold text-sm">$249.99</span>
+                    </div>
+                </div>
+                
+                <!-- Recently Viewed Product 4 -->
+                <div class="bg-white border rounded-lg overflow-hidden hover:shadow-md transition duration-300">
+                    <img src="https://placehold.co/300x200" alt="Product" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <h3 class="font-semibold text-sm mb-1">Apple Watch Series 8</h3>
+                        <span class="text-blue-600 font-bold text-sm">$399.99</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">TechMart</h3>
+                    <p class="text-gray-400 mb-4">
+                        Your trusted destination for premium electronics and tech accessories.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="product-list.html" class="text-gray-400 hover:text-white">Products</a></li>
+                        <li><a href="../index.html#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white">My Orders</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Categories -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="product-list.html?category=laptops" class="text-gray-400 hover:text-white">Laptops</a></li>
+                        <li><a href="product-list.html?category=smartphones" class="text-gray-400 hover:text-white">Smartphones</a></li>
+                        <li><a href="product-list.html?category=accessories" class="text-gray-400 hover:text-white">Accessories</a></li>
+                        <li><a href="product-list.html?category=wearables" class="text-gray-400 hover:text-white">Wearables</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Tech Street, Berlin, Germany</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                            <span>+49 123 456 7890</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3"></i>
+                            <span>support@techmart.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-gray-700 mb-6">
+            
+            <!-- Copyright -->
+            <div class="text-center text-gray-400">
+                <p>&copy; 2025 TechMart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/app.js"></script>
+    <script src="../js/products.js"></script>

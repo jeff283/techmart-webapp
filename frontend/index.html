@@ -16,7 +16,309 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
   </head>
-  <body>
-    <h1 class="text-3xl font-bold">Hello world!</h1>
-  </body>
+  <body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-laptop-code text-2xl"></i>
+                    <span class="font-bold text-xl">TechMart</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-blue-200 font-medium">Home</a>
+                    <a href="pages/product-list.html" class="hover:text-blue-200">Products</a>
+                    <a href="#about" class="hover:text-blue-200">About Us</a>
+                    <a href="pages/orders.html" class="hover:text-blue-200">My Orders</a>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:block">
+                    <div class="relative">
+                        <input type="text" placeholder="Search products..." class="px-4 py-1 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <button class="absolute right-0 top-0 mt-1 mr-3">
+                            <i class="fas fa-search text-gray-500"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu and Cart -->
+                <div class="flex items-center space-x-4">
+                    <a href="pages/cart.html" class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs" id="cart-count">0</span>
+                    </a>
+                    <button class="md:hidden focus:outline-none" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu (hidden by default) -->
+            <div class="md:hidden hidden mt-3 space-y-2" id="mobile-menu">
+                <a href="index.html" class="block hover:bg-blue-700 px-3 py-2 rounded">Home</a>
+                <a href="pages/product-list.html" class="block hover:bg-blue-700 px-3 py-2 rounded">Products</a>
+                <a href="#about" class="block hover:bg-blue-700 px-3 py-2 rounded">About Us</a>
+                <a href="pages/orders.html" class="block hover:bg-blue-700 px-3 py-2 rounded">My Orders</a>
+                <div class="pt-2">
+                    <input type="text" placeholder="Search products..." class="w-full px-4 py-1 rounded-full text-gray-800 focus:outline-none">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to TechMart</h1>
+                    <p class="text-xl mb-6">Your one-stop shop for premium electronics and tech accessories.</p>
+                    <div class="space-x-4">
+                        <a href="pages/product-list.html" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition duration-300">Shop Now</a>
+                        <a href="#featured" class="border border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition duration-300">Featured Products</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400" alt="Electronics" class="rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Products Section -->
+    <section id="featured" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Featured Products</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+               <!-- Loaded by app.js -->
+            </div>
+            <div class="text-center mt-8">
+                <a href="pages/product-list.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Shop by Category</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Category 1 -->
+                <a href="pages/product-list.html?category=laptops" class="bg-white rounded-lg p-6 text-center shadow hover:shadow-lg transition duration-300">
+                    <i class="fas fa-laptop text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold">Laptops</h3>
+                </a>
+                
+                <!-- Category 2 -->
+                <a href="pages/product-list.html?category=smartphones" class="bg-white rounded-lg p-6 text-center shadow hover:shadow-lg transition duration-300">
+                    <i class="fas fa-mobile-alt text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold">Smartphones</h3>
+                </a>
+                
+                <!-- Category 3 -->
+                <a href="pages/product-list.html?category=accessories" class="bg-white rounded-lg p-6 text-center shadow hover:shadow-lg transition duration-300">
+                    <i class="fas fa-headphones text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold">Accessories</h3>
+                </a>
+                
+                <!-- Category 4 -->
+                <a href="pages/product-list.html?category=wearables" class="bg-white rounded-lg p-6 text-center shadow hover:shadow-lg transition duration-300">
+                    <i class="fas fa-watch text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold">Wearables</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="https://placehold.co/600x400" alt="About Us" class="rounded-lg shadow-xl">
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <h2 class="text-3xl font-bold mb-6">About TechMart</h2>
+                    <p class="text-gray-600 mb-4">
+                        Founded in 2020, TechMart has quickly established itself as a premier destination for quality electronics and tech accessories. We pride ourselves on offering a carefully curated selection of products that meet our rigorous standards for performance, design, and durability.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        Our mission is to make cutting-edge technology accessible to everyone. We partner directly with manufacturers to bring you the best prices without compromising on quality or customer service.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="text-center">
+                            <div class="text-blue-600 font-bold text-2xl">5,000+</div>
+                            <div class="text-gray-500">Products</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-blue-600 font-bold text-2xl">50K+</div>
+                            <div class="text-gray-500">Customers</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-blue-600 font-bold text-2xl">30+</div>
+                            <div class="text-gray-500">Countries</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-12 bg-blue-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p class="mb-6 max-w-2xl mx-auto">Subscribe to our newsletter for the latest product updates, exclusive offers, and tech news.</p>
+            <form class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-l-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <button type="submit" class="bg-indigo-700 px-6 py-3 rounded-r-lg font-medium hover:bg-indigo-800 transition duration-300">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">What Our Customers Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/50" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Sarah Johnson</h4>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "The laptop I purchased from TechMart exceeded all my expectations. The delivery was prompt, and the customer service was exceptional."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/50" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Michael Chen</h4>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "Great selection of products at competitive prices. The website is easy to navigate, and the checkout process is smooth and hassle-free."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/50" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Emily Rodriguez</h4>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">
+                        "I've been a loyal TechMart customer for two years now. Their after-sales support is unmatched, and they always honor their warranty promises."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">TechMart</h3>
+                    <p class="text-gray-400 mb-4">
+                        Your trusted destination for premium electronics and tech accessories.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="pages/product-list.html" class="text-gray-400 hover:text-white">Products</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="pages/orders.html" class="text-gray-400 hover:text-white">My Orders</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Categories -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="pages/product-list.html?category=laptops" class="text-gray-400 hover:text-white">Laptops</a></li>
+                        <li><a href="pages/product-list.html?category=smartphones" class="text-gray-400 hover:text-white">Smartphones</a></li>
+                        <li><a href="pages/product-list.html?category=accessories" class="text-gray-400 hover:text-white">Accessories</a></li>
+                        <li><a href="pages/product-list.html?category=wearables" class="text-gray-400 hover:text-white">Wearables</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Tech Street, Berlin, Germany</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                            <span>+49 123 456 7890</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3"></i>
+                            <span>support@techmart.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-gray-700 mb-6">
+            
+            <!-- Copyright -->
+            <div class="text-center text-gray-400">
+                <p>&copy; 2025 TechMart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Script -->
+    <script src="js/app.js"></script>
+
+</body>
 </html>

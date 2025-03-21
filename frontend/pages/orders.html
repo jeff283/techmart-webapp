@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders - TechMart</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-laptop-code text-2xl"></i>
+                <span class="font-bold text-xl">TechMart</span>
+            </div>
+            <div class="space-x-6">
+                <a href="../index.html" class="hover:text-blue-200">Home</a>
+                <a href="product-list.html" class="hover:text-blue-200">Products</a>
+                <a href="orders.html" class="hover:text-blue-200">My Orders</a>
+                <a href="cart.html" class="relative">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs" id="cart-count">2</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Orders Section -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">My Orders</h1>
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <!-- Orders List -->
+            <div class="space-y-6">
+                <!-- Order Item 1 -->
+                <div class="border-b pb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-700 font-semibold">Order #12345</span>
+                        <span class="text-green-600 font-semibold">Delivered</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <p class="text-gray-600">MacBook Pro 13" x 1</p>
+                        <p class="font-semibold">$1,299.99</p>
+                    </div>
+                    <div class="text-gray-500 text-sm">Ordered on March 15, 2025</div>
+                </div>
+
+                <!-- Order Item 2 -->
+                <div class="border-b pb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-700 font-semibold">Order #12346</span>
+                        <span class="text-yellow-500 font-semibold">Shipped</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <p class="text-gray-600">AirPods Pro x 2</p>
+                        <p class="font-semibold">$499.98</p>
+                    </div>
+                    <div class="text-gray-500 text-sm">Ordered on March 17, 2025</div>
+                </div>
+
+                <!-- Order Item 3 -->
+                <div class="">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-700 font-semibold">Order #12347</span>
+                        <span class="text-blue-600 font-semibold">Processing</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <p class="text-gray-600">Apple Watch Series 8 x 1</p>
+                        <p class="font-semibold">$399.99</p>
+                    </div>
+                    <div class="text-gray-500 text-sm">Ordered on March 18, 2025</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">TechMart</h3>
+                    <p class="text-gray-400 mb-4">
+                        Your trusted destination for premium electronics and tech accessories.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="product-list.html" class="text-gray-400 hover:text-white">Products</a></li>
+                        <li><a href="../index.html#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white">My Orders</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Categories -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="product-list.html?category=laptops" class="text-gray-400 hover:text-white">Laptops</a></li>
+                        <li><a href="product-list.html?category=smartphones" class="text-gray-400 hover:text-white">Smartphones</a></li>
+                        <li><a href="product-list.html?category=accessories" class="text-gray-400 hover:text-white">Accessories</a></li>
+                        <li><a href="product-list.html?category=wearables" class="text-gray-400 hover:text-white">Wearables</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Tech Street, Berlin, Germany</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                            <span>+49 123 456 7890</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3"></i>
+                            <span>support@techmart.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-gray-700 mb-6">
+            
+            <!-- Copyright -->
+            <div class="text-center text-gray-400">
+                <p>&copy; 2025 TechMart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
