@@ -9,6 +9,15 @@ exports.getProducts = async (req, res) => {
     }
 };
 
+exports.getProduct = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        res.status(200).json(product);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
 exports.createProduct = async (req, res) => {
     try {
         const newProduct = new Product(req.body);
@@ -18,3 +27,18 @@ exports.createProduct = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+
+exports.updateProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = req.body;
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No product with that id');
+
+        const updatedProduct = await Product.findByIdAndUpdate(id, product);
+        res.json(updatedProduct);
+        
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+   }  
