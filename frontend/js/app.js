@@ -3,6 +3,7 @@
 let cart = [];
 let products = [];
 let featuredProducts = [];
+let baseUrl = 'http://localhost:5000';
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -109,7 +110,7 @@ function setupEventListeners() {
 async function loadProducts() {
     try {
         // Try to fetch from API first
-        const response = await fetch('/api/products');
+        const response = await fetch(`${baseUrl}/api/products`);
         
         // Check if the request was successful
         if (response.ok) {
