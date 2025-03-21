@@ -9,6 +9,7 @@ const productSchema = mongoose.Schema(
     image: { type: String, default:"https://placehold.co/600x400" },
     category: { type: String, required: true },
     featured: { type: Boolean, default: false },
+ 
   },
   { timestamps: true }
 );

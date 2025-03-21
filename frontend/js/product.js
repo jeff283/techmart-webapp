@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname.includes('product-list.html')) {
         // Load products
         loadProducts();
-        
-        // Initialize filters
-        initializeFilters();
     }
     
     // Check if we're on product detail page
@@ -66,86 +63,7 @@ function setupProductEventListeners() {
             mobileMenu.classList.toggle('hidden');
         });
     }
-}
-
-// Initialize filters on product list page
-function initializeFilters() {
-    // Category filter event listeners
-    const categoryFilters = document.querySelectorAll('.category-filter');
-    categoryFilters.forEach(filter => {
-        filter.addEventListener('change', applyFilters);
-    });
-
-    // Brand filter event listeners
-    const brandFilters = document.querySelectorAll('.brand-filter');
-    brandFilters.forEach(filter => {
-        filter.addEventListener('change', applyFilters);
-    });
-
-    // Rating filter event listeners
-    const ratingFilters = document.querySelectorAll('.rating-filter');
-    ratingFilters.forEach(filter => {
-        filter.addEventListener('change', applyFilters);
-    });
-
-    // Price filter button
-    const applyPriceButton = document.getElementById('apply-price-filter');
-    if (applyPriceButton) {
-        applyPriceButton.addEventListener('click', applyFilters);
-    }
-
-    // Sort selection
-    const sortSelect = document.getElementById('sort-by');
-    if (sortSelect) {
-        sortSelect.addEventListener('change', applyFilters);
-    }
-
-    // View toggle buttons
-    const gridViewButton = document.getElementById('grid-view');
-    const listViewButton = document.getElementById('list-view');
-    const productsContainer = document.getElementById('products-container');
     
-    if (gridViewButton && listViewButton && productsContainer) {
-        gridViewButton.addEventListener('click', function() {
-            productsContainer.classList.remove('grid-cols-1');
-            productsContainer.classList.add('grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-3');
-            gridViewButton.classList.add('text-blue-600');
-            gridViewButton.classList.remove('text-gray-400');
-            listViewButton.classList.add('text-gray-400');
-            listViewButton.classList.remove('text-blue-600');
-        });
-        
-        listViewButton.addEventListener('click', function() {
-            productsContainer.classList.remove('sm:grid-cols-2', 'lg:grid-cols-3');
-            productsContainer.classList.add('grid-cols-1');
-            listViewButton.classList.add('text-blue-600');
-            listViewButton.classList.remove('text-gray-400');
-            gridViewButton.classList.add('text-gray-400');
-            gridViewButton.classList.remove('text-blue-600');
-        });
-    }
-
-    // Clear filters button
-    const clearFiltersButton = document.getElementById('clear-filters');
-    if (clearFiltersButton) {
-        clearFiltersButton.addEventListener('click', function() {
-            // Clear all checkboxes
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            
-            // Clear price inputs
-            document.getElementById('min-price').value = '';
-            document.getElementById('max-price').value = '';
-            
-            // Reset sort to default
-            document.getElementById('sort-by').value = 'featured';
-            
-            // Apply cleared filters
-            applyFilters();
-        });
-    }
-
     // Reset search button
     const resetSearchButton = document.getElementById('reset-search');
     if (resetSearchButton) {
@@ -153,9 +71,6 @@ function initializeFilters() {
             window.location.href = 'product-list.html';
         });
     }
-
-    // Check URL parameters for initial filtering
-    handleUrlParams();
 }
 
 // Load products from API or fallback data
@@ -168,148 +83,55 @@ async function loadProducts() {
         if (response.ok) {
             products = await response.json();
             filteredProducts = [...products];
+            
+            // Handle search parameter if present
+            handleSearchParam();
+            
+            // Render all products if no search parameter
             renderProductList(filteredProducts);
         } else {
-            let noProduct = []
+            let noProduct = [];
             renderProductList(noProduct);
-
         }
     } catch (error) {
         console.error('Error loading products:', error);
     }
 }
 
-
-
-// Handle URL parameters for filtering products
-function handleUrlParams() {
+// Handle search parameter
+function handleSearchParam() {
     const urlParams = new URLSearchParams(window.location.search);
-    const categoryParam = urlParams.get('category');
     const searchParam = urlParams.get('search');
-    
-    // Reset filters first
-    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.checked = false;
-    });
-    
-    // Apply category filter from URL if present
-    if (categoryParam) {
-        const categoryCheckbox = document.getElementById(`category-${categoryParam}`);
-        if (categoryCheckbox) {
-            categoryCheckbox.checked = true;
-        }
-        
-        // Update the category title
-        const categoryTitle = document.getElementById('category-title');
-        if (categoryTitle) {
-            categoryTitle.textContent = categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
-        }
-    }
     
     // Apply search filter if present
     if (searchParam) {
         document.getElementById('search-input').value = searchParam;
         
-        // Update the search result title
+        // Update the search result title if it exists
         const searchTitle = document.getElementById('search-title');
         if (searchTitle) {
             searchTitle.textContent = `Search Results for "${searchParam}"`;
         }
+        
+        // Filter products by search term
+        applySearch(searchParam);
     }
-    
-    // Apply filters
-    applyFilters();
 }
 
-// Apply all active filters and sort options
-function applyFilters() {
-    // Start with all products
-    filteredProducts = [...products];
-    
-    // Get filter values
-    const selectedCategories = getSelectedValues('.category-filter');
-    const selectedBrands = getSelectedValues('.brand-filter');
-    const selectedRatings = getSelectedValues('.rating-filter');
-    const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
-    const maxPrice = parseFloat(document.getElementById('max-price').value) || Number.MAX_VALUE;
-    const sortBy = document.getElementById('sort-by').value;
-    
-    // Apply search filter from URL if present
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchParam = urlParams.get('search');
-    
-    if (searchParam) {
-        const searchTerm = searchParam.toLowerCase();
-        filteredProducts = filteredProducts.filter(product => 
+// Apply search filter
+function applySearch(searchTerm) {
+    if (!searchTerm) {
+        filteredProducts = [...products];
+    } else {
+        searchTerm = searchTerm.toLowerCase();
+        filteredProducts = products.filter(product => 
             product.name.toLowerCase().includes(searchTerm) || 
             product.description.toLowerCase().includes(searchTerm)
         );
     }
     
-    // Apply category filter
-    if (selectedCategories.length > 0) {
-        filteredProducts = filteredProducts.filter(product => 
-            selectedCategories.includes(product.category)
-        );
-    }
-    
-    // Apply brand filter
-    if (selectedBrands.length > 0) {
-        filteredProducts = filteredProducts.filter(product => 
-            selectedBrands.includes(product.brand)
-        );
-    }
-    
-    // Apply rating filter (products with rating >= selected)
-    if (selectedRatings.length > 0) {
-        filteredProducts = filteredProducts.filter(product => 
-            selectedRatings.some(rating => product.rating >= parseInt(rating))
-        );
-    }
-    
-    // Apply price filter
-    filteredProducts = filteredProducts.filter(product => 
-        product.price >= minPrice && product.price <= maxPrice
-    );
-    
-    // Apply sorting
-    sortProducts(sortBy);
-    
     // Render the filtered products
     renderProductList(filteredProducts);
-}
-
-// Get selected values from a group of checkboxes
-function getSelectedValues(selector) {
-    const selectedValues = [];
-    document.querySelectorAll(selector).forEach(checkbox => {
-        if (checkbox.checked) {
-            selectedValues.push(checkbox.value);
-        }
-    });
-    return selectedValues;
-}
-
-// Sort products based on selected option
-function sortProducts(sortOption) {
-    switch (sortOption) {
-        case 'featured':
-            filteredProducts.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
-            break;
-        case 'price-low':
-            filteredProducts.sort((a, b) => a.price - b.price);
-            break;
-        case 'price-high':
-            filteredProducts.sort((a, b) => b.price - a.price);
-            break;
-        case 'rating':
-            filteredProducts.sort((a, b) => b.rating - a.rating);
-            break;
-        case 'newest':
-            // Assuming newer products have higher IDs
-            filteredProducts.sort((a, b) => b.id - a.id);
-            break;
-    }
 }
 
 // Render product list on product-list.html
@@ -337,30 +159,19 @@ function renderProductList(products) {
     products.forEach(product => {
         const productElement = document.createElement('div');
         productElement.className = 'product-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300';
-        productElement.dataset.category = product.category;
-        productElement.dataset.price = product.price;
-        productElement.dataset.rating = product.rating;
-        productElement.dataset.brand = product.brand;
-        
-        // Generate star rating HTML
-        const ratingHtml = generateRatingStars(product.rating);
         
         productElement.innerHTML = `
             <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
             <div class="p-4">
-                <div class="text-yellow-400 mb-2">
-                    ${ratingHtml}
-                    <span class="text-gray-600 text-sm ml-1">(${product.reviewCount || 0})</span>
-                </div>
                 <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
                 <p class="text-gray-600 mb-4">${product.description}</p>
                 <div class="flex justify-between items-center">
                     <span class="text-blue-600 font-bold">$${product.price.toFixed(2)}</span>
                     <div class="flex space-x-2">
-                        <a href="product-detail.html?id=${product.id}" 
+                        <a href="product-detail.html?id=${product._id}" 
                            class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300">Details</a>
                         <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" 
-                                onclick="addToCart(${product.id})">Add to Cart</button>
+                                onclick="addToCart(${product._id})">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -373,31 +184,6 @@ function renderProductList(products) {
     if (productCountElement) {
         productCountElement.textContent = `${products.length} products`;
     }
-}
-
-// Generate HTML for star ratings
-function generateRatingStars(rating) {
-    let starsHtml = '';
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5;
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-    
-    // Add full stars
-    for (let i = 0; i < fullStars; i++) {
-        starsHtml += '<i class="fas fa-star"></i>';
-    }
-    
-    // Add half star if needed
-    if (halfStar) {
-        starsHtml += '<i class="fas fa-star-half-alt"></i>';
-    }
-    
-    // Add empty stars
-    for (let i = 0; i < emptyStars; i++) {
-        starsHtml += '<i class="far fa-star"></i>';
-    }
-    
-    return starsHtml;
 }
 
 // Load product details for the product detail page
@@ -440,7 +226,6 @@ async function fetchProductDetails(productId) {
             const product = await response.json();
             renderProductDetails(product);
         } else {
-         
             const product = products.find(p => p.id === productId);
             
             if (product) {
@@ -453,7 +238,6 @@ async function fetchProductDetails(productId) {
     } catch (error) {
         console.error('Error fetching product details:', error);
         
-       
         const product = products.find(p => p.id === productId);
         
         if (product) {
@@ -488,57 +272,13 @@ function renderProductDetails(product) {
     document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
     document.getElementById('product-description').textContent = product.description;
     
-    // Update rating if available
-    if (product.rating) {
-        const ratingElement = document.getElementById('product-rating');
-        if (ratingElement) {
-            ratingElement.innerHTML = generateRatingStars(product.rating);
-        }
-        
-        const reviewCountElement = document.getElementById('review-count');
-        if (reviewCountElement) {
-            reviewCountElement.textContent = `(${product.reviewCount || 0} reviews)`;
-        }
-    }
-    
     // Set up the add to cart button
     const addToCartButton = document.getElementById('add-to-cart-button');
     if (addToCartButton) {
         addToCartButton.onclick = function() {
-            addToCart(product.id);
+            addToCart(product._id);
         };
     }
-    
-    // Add to recently viewed (if supported)
-    addToRecentlyViewed(product);
-}
-
-// Add a product to recently viewed list (stored in localStorage)
-function addToRecentlyViewed(product) {
-    // Try to get existing recently viewed items
-    let recentlyViewed = [];
-    try {
-        recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
-    } catch (e) {
-        recentlyViewed = [];
-    }
-    
-    // Remove the product if it's already in the list
-    recentlyViewed = recentlyViewed.filter(item => item.id !== product.id);
-    
-    // Add the product to the beginning of the list
-    recentlyViewed.unshift({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image
-    });
-    
-    // Keep only the 4 most recent items
-    recentlyViewed = recentlyViewed.slice(0, 4);
-    
-    // Save to localStorage
-    localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
 }
 
 // Function used by addToCart button

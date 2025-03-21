@@ -19,7 +19,8 @@ const seedProducts = async () => {
           stock: 50,
           category: "Laptops",
           image: "https://placehold.co/600x400?text=Acer+Aspire+5",
-          featured: true
+          featured: true,
+       
         },
         {
           name: "Apple iPhone 14 Pro",
@@ -28,7 +29,7 @@ const seedProducts = async () => {
           stock: 30,
           category: "Smartphones",
           image: "https://placehold.co/600x400?text=iPhone+14+Pro",
-          featured: true
+          featured: true,
         },
         {
           name: "Samsung Galaxy Watch 6",

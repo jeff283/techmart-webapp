@@ -85,131 +85,11 @@
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-8">
         <div class="flex flex-col lg:flex-row">
-            <!-- Filters Section - Left Side -->
-            <div class="lg:w-1/4 mb-6 lg:mb-0 lg:pr-6">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h2 class="text-xl font-bold mb-4">Filters</h2>
-                    
-                    <!-- Category Filter -->
-                    <div class="mb-6">
-                        <h3 class="font-semibold mb-2">Categories</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="category-laptops" class="category-filter mr-2" value="laptops">
-                                <label for="category-laptops">Laptops</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="category-smartphones" class="category-filter mr-2" value="smartphones">
-                                <label for="category-smartphones">Smartphones</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="category-accessories" class="category-filter mr-2" value="accessories">
-                                <label for="category-accessories">Accessories</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="category-wearables" class="category-filter mr-2" value="wearables">
-                                <label for="category-wearables">Wearables</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Price Range Filter -->
-                    <div class="mb-6">
-                        <h3 class="font-semibold mb-2">Price Range</h3>
-                        <div class="space-y-2">
-                            <div>
-                                <label for="min-price" class="block text-sm text-gray-600">Min Price:</label>
-                                <input type="number" id="min-price" class="w-full rounded border-gray-300 p-2" placeholder="$0">
-                            </div>
-                            <div>
-                                <label for="max-price" class="block text-sm text-gray-600">Max Price:</label>
-                                <input type="number" id="max-price" class="w-full rounded border-gray-300 p-2" placeholder="$2000">
-                            </div>
-                        </div>
-                        <button id="apply-price-filter" class="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-700 w-full">Apply</button>
-                    </div>
-                    
-                    <!-- Rating Filter -->
-                    <div class="mb-6">
-                        <h3 class="font-semibold mb-2">Rating</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="rating-4-plus" class="rating-filter mr-2" value="4">
-                                <label for="rating-4-plus" class="flex">
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="far fa-star text-yellow-400"></i>
-                                    <span class="ml-1">& up</span>
-                                </label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="rating-3-plus" class="rating-filter mr-2" value="3">
-                                <label for="rating-3-plus" class="flex">
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                    <i class="far fa-star text-yellow-400"></i>
-                                    <i class="far fa-star text-yellow-400"></i>
-                                    <span class="ml-1">& up</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Brand Filter -->
-                    <div>
-                        <h3 class="font-semibold mb-2">Brands</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="brand-apple" class="brand-filter mr-2" value="apple">
-                                <label for="brand-apple">Apple</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="brand-samsung" class="brand-filter mr-2" value="samsung">
-                                <label for="brand-samsung">Samsung</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="brand-dell" class="brand-filter mr-2" value="dell">
-                                <label for="brand-dell">Dell</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="brand-sony" class="brand-filter mr-2" value="sony">
-                                <label for="brand-sony">Sony</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Clear All Filters Button -->
-                    <button id="clear-filters" class="bg-gray-200 text-gray-800 px-4 py-2 rounded mt-6 hover:bg-gray-300 w-full">Clear All Filters</button>
-                </div>
-            </div>
+          
             
             <!-- Products Display - Right Side -->
-            <div class="lg:w-3/4">
-                <!-- Sort and View Controls -->
-                <div class="bg-white p-4 rounded-lg shadow mb-6 flex flex-col sm:flex-row justify-between items-center">
-                    <div class="flex items-center mb-4 sm:mb-0">
-                        <label for="sort-by" class="mr-2">Sort by:</label>
-                        <select id="sort-by" class="rounded border-gray-300 p-1">
-                            <option value="featured">Featured</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                            <option value="rating">Highest Rated</option>
-                            <option value="newest">Newest First</option>
-                        </select>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <span>View:</span>
-                        <button id="grid-view" class="text-blue-600 focus:outline-none">
-                            <i class="fas fa-th text-lg"></i>
-                        </button>
-                        <button id="list-view" class="text-gray-400 focus:outline-none">
-                            <i class="fas fa-list text-lg"></i>
-                        </button>
-                    </div>
-                </div>
+            <div class="">
+          
                 
                 <!-- Products Grid -->
                 <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
@@ -225,63 +105,12 @@
                     <button id="reset-search" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Reset Filters</button>
                 </div>
                 
-                <!-- Pagination -->
-                <div class="mt-8 flex justify-center">
-                    <nav class="inline-flex rounded-md shadow">
-                        <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">Previous</a>
-                        <a href="#" class="py-2 px-4 bg-blue-600 text-white border border-blue-600">1</a>
-                        <a href="#" class="py-2 px-4 bg-white border border-gray-300 hover:bg-gray-50">2</a>
-                        <a href="#" class="py-2 px-4 bg-white border border-gray-300 hover:bg-gray-50">3</a>
-                        <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">Next</a>
-                    </nav>
-                </div>
+            
             </div>
         </div>
     </div>
 
-    <!-- Recently Viewed Products -->
-    <section class="bg-white py-10">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6">Recently Viewed</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- Recently Viewed Product 1 -->
-                <div class="bg-white border rounded-lg overflow-hidden hover:shadow-md transition duration-300">
-                    <img src="https://placehold.co/300x200" alt="Product" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <h3 class="font-semibold text-sm mb-1">MacBook Pro 13"</h3>
-                        <span class="text-blue-600 font-bold text-sm">$1,299.99</span>
-                    </div>
-                </div>
-                
-                <!-- Recently Viewed Product 2 -->
-                <div class="bg-white border rounded-lg overflow-hidden hover:shadow-md transition duration-300">
-                    <img src="https://placehold.co/300x200" alt="Product" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <h3 class="font-semibold text-sm mb-1">Samsung Galaxy S23</h3>
-                        <span class="text-blue-600 font-bold text-sm">$899.99</span>
-                    </div>
-                </div>
-                
-                <!-- Recently Viewed Product 3 -->
-                <div class="bg-white border rounded-lg overflow-hidden hover:shadow-md transition duration-300">
-                    <img src="https://placehold.co/300x200" alt="Product" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <h3 class="font-semibold text-sm mb-1">Sony WH-1000XM5</h3>
-                        <span class="text-blue-600 font-bold text-sm">$249.99</span>
-                    </div>
-                </div>
-                
-                <!-- Recently Viewed Product 4 -->
-                <div class="bg-white border rounded-lg overflow-hidden hover:shadow-md transition duration-300">
-                    <img src="https://placehold.co/300x200" alt="Product" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <h3 class="font-semibold text-sm mb-1">Apple Watch Series 8</h3>
-                        <span class="text-blue-600 font-bold text-sm">$399.99</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white pt-12 pb-6">
