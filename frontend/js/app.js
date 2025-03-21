@@ -96,7 +96,7 @@ function addToCart(productId) {
             } else {
                 // Add new item to cart
                 cart.push({
-                    id: product.id,
+                    id: product._id,
                     name: product.name,
                     price: product.price,
                     image: product.image,
@@ -190,20 +190,23 @@ function renderCartPage() {
         const cartItemElement = document.createElement('div');
         cartItemElement.className = 'flex items-center py-4 border-b';
         cartItemElement.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4">
+            <img 
+            src="${item.image}" 
+            alt="${item.name}" 
+            class="w-16 h-16 object-cover rounded mr-4">
             <div class="flex-grow">
                 <h3 class="font-medium">${item.name}</h3>
                 <p class="text-gray-600">$${item.price.toFixed(2)} x ${item.quantity}</p>
             </div>
             <div class="flex items-center space-x-2">
                 <button class="bg-gray-200 text-gray-800 w-8 h-8 rounded-full" 
-                        onclick="updateCartItem(${item.id}, ${item.quantity - 1})">-</button>
+                        onclick="updateCartItem('${item.id}', ${item.quantity - 1})">-</button>
                 <span>${item.quantity}</span>
                 <button class="bg-gray-200 text-gray-800 w-8 h-8 rounded-full" 
-                        onclick="updateCartItem(${item.id}, ${item.quantity + 1})">+</button>
+                        onclick="updateCartItem('${item.id}', ${item.quantity + 1})">+</button>
             </div>
             <div class="ml-4 font-medium">$${itemTotal.toFixed(2)}</div>
-            <button class="ml-4 text-red-500" onclick="removeCartItem(${item.id})">
+            <button class="ml-4 text-red-500" onclick="removeCartItem('${item.id}')">
                 <i class="fas fa-trash"></i>
             </button>
         `;
@@ -218,6 +221,7 @@ function renderCartPage() {
 
 // Update cart item quantity
 function updateCartItem(productId, newQuantity) {
+    console.log("Clicked updateCartItem: ", productId, newQuantity);
     // Find the item in the cart
     const itemIndex = cart.findIndex(item => item.id === productId);
     
