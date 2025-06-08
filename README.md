@@ -118,7 +118,7 @@ This project is licensed under the ISC License.
 
 ## 👥 Authors
 
-- Your Name - Initial work
+- Jeff Njoroge - [github](https://github.com/jeff283)
 
 ## 🙏 Acknowledgments
 
