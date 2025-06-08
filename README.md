@@ -76,7 +76,7 @@ A full-stack e-commerce web application built with modern web technologies. This
 Create a `.env` file in the backend directory with the following variables:
 ```
 MONGO_URI=mongodb://localhost:27017/ecommerceDB
-NODE_ENV=development
+PORT=5000
 ```
 
 ## 📁 Project Structure
